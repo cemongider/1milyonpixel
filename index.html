@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1 Milyon Piksel - 20 Yıl Bende</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; background-color: #f0f2f5; margin: 0; padding: 20px; }
+        h1 { color: #1a1a1a; margin-bottom: 5px; }
+        p.subtitle { color: #666; margin-bottom: 20px; }
+        
+        /* Sayaç Paneli */
+        .stats-bar {
+            display: inline-flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 30px;
+            background: #222;
+            color: #fff;
+            padding: 20px 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .stat-item span { display: block; font-size: 28px; font-weight: bold; color: #00ff88; }
+        .stat-item small { font-size: 11px; color: #aaa; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Arsa / Grid Alanı */
+        .canvas-container {
+            display: inline-block;
+            position: relative;
+            border: 5px solid #333;
+            background-color: #fff;
+            line-height: 0; /* Boşlukları sıfırla */
+        }
+        
+        .grid-canvas {
+            width: 1000px;
+            height: 1000px;
+            background-size: 10px 10px;
+            background-image: 
+                linear-gradient(to right, #ececec 1px, transparent 1px),
+                linear-gradient(to bottom, #ececec 1px, transparent 1px);
+            cursor: crosshair;
+            position: relative;
+        }
+
+        /* İletişim ve Buton */
+        .footer-info { margin-top: 30px; padding: 20px; }
+        .buy-btn { 
+            background: #ce1212; color: white; padding: 15px 35px; 
+            text-decoration: none; border-radius: 50px; font-weight: bold; 
+            font-size: 18px; transition: 0.3s; display: inline-block;
+        }
+        .buy-btn:hover { background: #ff0000; transform: scale(1.05); }
+    </style>
+</head>
+<body>
+
+    <h1>1.000.000 PİKSEL DİJİTAL ANIT</h1>
+    <p class="subtitle">20 Yıl Boyunca Silinmeyecek Reklam Alanınız</p>
+
+    <div class="stats-bar">
+        <div class="stat-item">
+            <span id="remaining-pixels">1.000.000</span>
+            <small>Kalan Piksel</small>
+        </div>
+        <div class="stat-item">
+            <span id="countdown-timer">Hesaplanıyor...</span>
+            <small>2046 Hedefine Kalan</small>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="canvas-container">
+        <div class="grid-canvas" id="main-grid">
+            </div>
+    </div>
+
+    <div class="footer-info">
+        <p>Her 10x10 blok sadece <strong>20 TL</strong> (2046'ya kadar geçerli)</p>
+        <a href="mailto:mail@1milyonpixel.com" class="buy-btn">HEMEN YERİNİ AYIRT</a>
+    </div>
+
+    <script>
+        // 20 Yıllık Geri Sayım (2046 Hedefi)
+        const targetDate = new Date("March 15, 2046 00:00:00").getTime();
+
+        setInterval(function() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            const years = Math.floor(distance / (1000 * 60 * 60 * 24 * 365.25));
+            const days = Math.floor((distance % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+            document.getElementById("countdown-timer").innerHTML = 
+                years + "Y " + days + "G " + hours + "S";
+        }, 1000);
+    </script>
+
+</body>
+</html>
