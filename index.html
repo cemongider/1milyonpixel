@@ -3,102 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1 Milyon Piksel - 20 Yıl Bende</title>
+    <title>1 Milyon Piksel | 2026-2056 Dijital Varlık Fonu</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; background-color: #f0f2f5; margin: 0; padding: 20px; }
-        h1 { color: #1a1a1a; margin-bottom: 5px; }
-        p.subtitle { color: #666; margin-bottom: 20px; }
+        :root { --bg: #000; --gold: #D4AF37; --interface-bg: #0a0a0a; --text-muted: #666; }
+        body { margin: 0; padding: 0; background-color: var(--bg); color: #fff; font-family: 'Inter', system-ui, sans-serif; display: flex; flex-direction: column; align-items: center; }
         
-        /* Sayaç Paneli */
-        .stats-bar {
-            display: inline-flex;
-            justify-content: center;
-            gap: 40px;
-            margin-bottom: 30px;
-            background: #222;
-            color: #fff;
-            padding: 20px 40px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-        .stat-item span { display: block; font-size: 28px; font-weight: bold; color: #00ff88; }
-        .stat-item small { font-size: 11px; color: #aaa; text-transform: uppercase; letter-spacing: 1px; }
+        header { width: 100%; padding: 50px 0; text-align: center; border-bottom: 1px solid #111; background: linear-gradient(to bottom, #050505, #000); }
+        h1 { font-size: 3rem; font-weight: 800; margin: 0; letter-spacing: -2px; }
+        h1 span { color: var(--gold); }
+        .tagline { color: var(--text-muted); letter-spacing: 4px; font-size: 14px; margin-top: 10px; text-transform: uppercase; }
 
-        /* Arsa / Grid Alanı */
-        .canvas-container {
-            display: inline-block;
-            position: relative;
-            border: 5px solid #333;
-            background-color: #fff;
-            line-height: 0; /* Boşlukları sıfırla */
-        }
-        
-        .grid-canvas {
-            width: 1000px;
-            height: 1000px;
-            background-size: 10px 10px;
-            background-image: 
-                linear-gradient(to right, #ececec 1px, transparent 1px),
-                linear-gradient(to bottom, #ececec 1px, transparent 1px);
-            cursor: crosshair;
-            position: relative;
+        .contract-info { display: flex; gap: 40px; margin-top: 25px; justify-content: center; }
+        .info-item { border-left: 2px solid var(--gold); padding-left: 15px; text-align: left; }
+        .info-item label { display: block; font-size: 10px; color: var(--text-muted); text-transform: uppercase; }
+        .info-item span { font-weight: bold; font-size: 14px; }
+
+        #grid-frame { padding: 20px; background: #050505; border: 1px solid #111; margin: 40px 0; position: relative; }
+        #grid-container { 
+            position: relative; width: 1000px; height: 1000px; background-color: #000; 
+            background-image: linear-gradient(to right, #080808 1px, transparent 1px), linear-gradient(to bottom, #080808 1px, transparent 1px);
+            background-size: 10px 10px; cursor: crosshair;
         }
 
-        /* İletişim ve Buton */
-        .footer-info { margin-top: 30px; padding: 20px; }
-        .buy-btn { 
-            background: #ce1212; color: white; padding: 15px 35px; 
-            text-decoration: none; border-radius: 50px; font-weight: bold; 
-            font-size: 18px; transition: 0.3s; display: inline-block;
+        #selection-box { border: 1px solid var(--gold); background: rgba(212, 175, 55, 0.1); position: absolute; display: none; pointer-events: none; }
+        
+        .floating-data { 
+            position: fixed; bottom: 30px; right: 30px; background: var(--interface-bg); border: 1px solid #222; 
+            padding: 25px; z-index: 200; box-shadow: 0 20px 40px rgba(0,0,0,0.8); min-width: 250px;
         }
-        .buy-btn:hover { background: #ff0000; transform: scale(1.05); }
+        .data-header { font-size: 11px; color: var(--gold); letter-spacing: 2px; margin-bottom: 15px; border-bottom: 1px solid #222; padding-bottom: 10px; }
+        .price-val { font-size: 36px; font-weight: 900; color: #fff; margin-top: 10px; }
+
+        #submit-btn { 
+            position: fixed; left: 50%; bottom: 40px; transform: translateX(-50%); padding: 20px 70px; 
+            background: var(--gold); color: #000; border: none; font-weight: 900; font-size: 16px; 
+            cursor: pointer; display: none; z-index: 300; text-transform: uppercase; letter-spacing: 2px;
+            transition: all 0.2s ease;
+        }
+        #submit-btn:hover { background: #fff; transform: translateX(-50%) translateY(-2px); }
+
+        footer { padding: 40px; color: #222; font-size: 12px; letter-spacing: 1px; }
     </style>
 </head>
 <body>
 
-    <h1>1.000.000 PİKSEL DİJİTAL ANIT</h1>
-    <p class="subtitle">20 Yıl Boyunca Silinmeyecek Reklam Alanınız</p>
-
-    <div class="stats-bar">
-        <div class="stat-item">
-            <span id="remaining-pixels">1.000.000</span>
-            <small>Kalan Piksel</small>
-        </div>
-        <div class="stat-item">
-            <span id="countdown-timer">Hesaplanıyor...</span>
-            <small>2046 Hedefine Kalan</small>
-        </div>
+<header>
+    <h1>1,000,000<span>.PIXELS</span></h1>
+    <div class="tagline">Dijital Varlık ve Reklam Platformu</div>
+    <div class="contract-info">
+        <div class="info-item"><label>Süre</label><span>30 YIL GARANTİLİ</span></div>
+        <div class="info-item"><label>Hedef</label><span>2056 TESCİL</span></div>
+        <div class="info-item"><label>Birim</label><span>2 TL / PİKSEL</span></div>
     </div>
+</header>
 
-    <br>
-
-    <div class="canvas-container">
-        <div class="grid-canvas" id="main-grid">
-<a href="https://1milyonpixel.com" title="Kurucu: 2026-2046" style="position: absolute; left: 0; top: 0; width: 10px; height: 10px; background: #000; display: block;"></a>
-            </div>
+<div id="grid-frame">
+    <div id="grid-container">
+        <div id="selection-box"></div>
+        <div style="position: absolute; left: 0; top: 0; width: 10px; height: 10px; background: var(--gold);"></div>
     </div>
+</div>
 
-    <div class="footer-info">
-        <p>Her 10x10 blok sadece <strong>20 TL</strong> (2046'ya kadar geçerli)</p>
-        <a href="mailto:mail@1milyonpixel.com" class="buy-btn">HEMEN YERİNİ AYIRT</a>
-    </div>
+<div class="floating-data" id="info">
+    <div class="data-header">ANALİZ PANELİ</div>
+    <div id="details">Başlamak için alan seçin.</div>
+    <div id="price" class="price-val"></div>
+</div>
 
-    <script>
-        // 20 Yıllık Geri Sayım (2046 Hedefi)
-        const targetDate = new Date("March 15, 2046 00:00:00").getTime();
+<button id="submit-btn">ALANI REZERVE ET</button>
 
-        setInterval(function() {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
+<footer>© 2026-2056 | Kesintisiz Yayın ve Veri Güvencesi Altındadır.</footer>
 
-            const years = Math.floor(distance / (1000 * 60 * 60 * 24 * 365.25));
-            const days = Math.floor((distance % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+<script>
+    const PRICE = 2;
+    const grid = document.getElementById('grid-container');
+    const selection = document.getElementById('selection-box');
+    const details = document.getElementById('details');
+    const priceDisplay = document.getElementById('price');
+    const btn = document.getElementById('submit-btn');
 
-            document.getElementById("countdown-timer").innerHTML = 
-                years + "Y " + days + "G " + hours + "S";
-        }, 1000);
-    </script>
+    let active = false, startX, startY, data = {};
 
+    grid.addEventListener('mousedown', (e) => {
+        active = true;
+        const r = grid.getBoundingClientRect();
+        startX = e.clientX - r.left;
+        startY = e.clientY - r.top;
+        selection.style.display = 'block';
+        btn.style.display = 'none';
+    });
+
+    window.addEventListener('mousemove', (e) => {
+        if (!active) return;
+        const r = grid.getBoundingClientRect();
+        let curX = Math.max(0, Math.min(e.clientX - r.left, 1000));
+        let curY = Math.max(0, Math.min(e.clientY - r.top, 1000));
+        
+        let w = Math.abs(Math.round(curX - startX));
+        let h = Math.abs(Math.round(curY - startY));
+        let x = Math.round(curX > startX ? startX : curX);
+        let y = Math.round(curY > startY ? startY : curY);
+
+        selection.style.width = w + 'px';
+        selection.style.height = h + 'px';
+        selection.style.left = x + 'px';
+        selection.style.top = y + 'px';
+
+        let total = w * h;
+        data = { x, y, w, h, total, cost: total * PRICE };
+        
+        details.innerHTML = `Koordinat: ${data.x}, ${data.y}<br>Boyut: ${data.w}x${data.h}`;
+        priceDisplay.innerHTML = `${data.cost.toLocaleString()} TL`;
+    });
+
+    window.addEventListener('mouseup', () => {
+        if (!active) return;
+        active = false;
+        if (data.total > 20) btn.style.display = 'block';
+    });
+
+    btn.onclick = () => {
+        const body = encodeURIComponent(`REKLAM ALANI TALEBİ\n\nKoordinat: ${data.x},${data.y}\nBoyut: ${data.w}x${data.h}\nAlan: ${data.total} px\nTutar: ${data.cost} TL`);
+        window.location.href = `mailto:mail@1milyonpixel.com?subject=Tescil_Talebi&body=${body}`;
+    };
+</script>
 </body>
 </html>
