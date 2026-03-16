@@ -2,133 +2,127 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>1 Milyon Piksel | 2026-2056</title>
+    <title>1 Milyon Piksel | Geleceğe Miras Bırak</title>
     <style>
-        body { margin: 0; padding: 0; background: #fafafa; color: #1a1a1a; font-family: 'Inter', -apple-system, sans-serif; display: flex; flex-direction: column; align-items: center; }
+        :root { --black: #000; --red: #d00; --gray: #666; --bg: #fff; }
+        body { margin: 0; padding: 0; background: var(--bg); color: var(--black); font-family: sans-serif; display: flex; flex-direction: column; align-items: center; }
         
-        /* Üst Bar: Zaman ve Durum */
-        .top-status { width: 100%; background: #1a1a1a; color: #fff; padding: 15px 0; text-align: center; font-size: 11px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; }
+        /* 2056 Sayacı */
+        .top-bar { width: 100%; background: var(--black); color: #fff; padding: 12px 0; text-align: center; font-size: 13px; font-weight: bold; letter-spacing: 1px; }
         
-        header { padding: 70px 20px; text-align: center; }
-        h1 { font-size: 45px; font-weight: 800; margin: 0; letter-spacing: -1px; }
-        .slogan { font-size: 16px; color: #666; margin-top: 10px; font-weight: 400; letter-spacing: 1px; }
+        header { padding: 40px 0; text-align: center; }
+        h1 { font-size: 45px; margin: 0; letter-spacing: -1px; }
+        .slogan { font-size: 18px; color: var(--gray); margin-top: 5px; font-style: italic; }
+
+        /* Yeni Tabela Yapısı */
+        .tabela { 
+            width: 1000px; border: 2px solid var(--black); margin-bottom: 25px; display: flex; background: #fafafa;
+        }
+        .tabela-baslik { 
+            background: var(--black); color: #fff; padding: 15px; width: 140px; 
+            text-align: center; font-weight: bold; font-size: 13px; display: flex; align-items: center; justify-content: center;
+        }
+        .tabela-icerik { flex: 1; padding: 15px; display: flex; justify-content: space-around; align-items: center; }
+        .faz { font-size: 11px; color: #aaa; border-right: 1px solid #eee; padding: 0 20px; text-align: center; }
+        .faz.aktif { color: var(--black); font-weight: bold; }
+        .faz span { display: block; font-size: 20px; margin: 5px 0; color: var(--black); }
+        .faz.aktif span { color: var(--red); }
 
         /* Arsa Alanı */
-        #grid-container { border: 1px solid #000; background: #fff; box-shadow: 0 30px 60px rgba(0,0,0,0.05); position: relative; }
+        #grid-container { border: 2px solid var(--black); position: relative; background: #fff; }
         #canvas { 
             width: 1000px; height: 1000px; position: relative; cursor: crosshair;
-            background-image: radial-gradient(#e5e5e5 0.5px, transparent 0.5px);
+            background-image: radial-gradient(#ddd 0.5px, transparent 0.5px);
             background-size: 10px 10px;
         }
-        #selection-box { border: 1px solid #000; background: rgba(0,0,0,0.05); position: absolute; display: none; z-index: 10; }
-        
-        /* Prestij Paneli */
-        .info-panel { 
-            position: fixed; bottom: 40px; right: 40px; background: #fff; border: 1px solid #000; 
-            padding: 35px; min-width: 250px; box-shadow: 15px 15px 0 rgba(0,0,0,0.05);
-        }
-        .info-panel h3 { margin: 0 0 20px 0; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #888; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        .data-row { margin-bottom: 12px; font-size: 14px; display: flex; justify-content: space-between; }
-        .price-display { font-size: 36px; font-weight: 700; color: #000; margin: 25px 0; font-family: 'serif'; }
-        
-        #btn-reserve { 
-            background: #000; color: #fff; border: none; padding: 18px; width: 100%; 
-            font-size: 13px; font-weight: bold; cursor: pointer; display: none;
-            letter-spacing: 2px; transition: 0.2s;
-        }
-        #btn-reserve:hover { background: #333; }
-        .guarantee { font-size: 10px; color: #aaa; margin-top: 15px; text-align: center; text-transform: uppercase; }
+        #selection { border: 1px solid var(--red); background: rgba(210,0,0,0.05); position: absolute; display: none; }
 
-        footer { padding: 80px 0; font-size: 11px; color: #bbb; letter-spacing: 1px; }
+        /* Tescil Paneli */
+        .panel { 
+            position: fixed; bottom: 30px; right: 30px; background: #fff; border: 2px solid var(--black); 
+            padding: 25px; width: 240px; box-shadow: 10px 10px 0 rgba(0,0,0,0.05); z-index: 100;
+        }
+        .panel h3 { margin: 0 0 15px 0; font-size: 12px; text-transform: uppercase; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .price { font-size: 32px; font-weight: bold; margin: 15px 0; }
+        button { background: var(--black); color: #fff; border: none; padding: 16px; width: 100%; cursor: pointer; font-weight: bold; text-transform: uppercase; display: none; }
+        .footer-note { font-size: 10px; color: #aaa; margin-top: 15px; text-align: center; }
     </style>
 </head>
 <body>
 
-<div class="top-status" id="timer">YOLCULUK 2056: -- YIL -- GÜN KALDI</div>
+<div class="top-bar" id="timer">2056 TAAHHÜDÜ: -- YIL -- GÜN KALDI</div>
 
 <header>
     <h1>1 MİLYON PİKSEL</h1>
-    <p class="slogan">GELECEĞE ATILAN İMZA. 30 YILLIK KALICILIK.</p>
+    <p class="slogan">Geleceğe miras bırak.</p>
 </header>
 
-<div id="grid-container">
-    <div id="canvas">
-        <div id="selection-box"></div>
-        <div style="width:10px; height:10px; background:#000; position:absolute; top:0; left:0;"></div>
+<div class="tabela">
+    <div class="tabela-baslik">BU TABLODA<br>SEN DE YERİNİ AL</div>
+    <div class="tabela-icerik">
+        <div class="faz aktif">İLK ADIM (100K)<span>2 TL</span><small>ŞU AN AKTİF</small></div>
+        <div class="faz">GELİŞİM (250K)<span>5 TL</span><small>SIRADAKİ</small></div>
+        <div class="faz">PRESTİJ (250K)<span>10 TL</span><small>DEĞERLENME</small></div>
+        <div class="faz" style="border:none">HATIRA (400K)<span>20 TL</span><small>FİNAL</small></div>
     </div>
 </div>
 
-<div class="info-panel">
-    <h3>DİJİTAL PARSEL</h3>
-    <div class="data-row"><span>Konum:</span> <span id="pos">-</span></div>
-    <div class="data-row"><span>Ölçü:</span> <span id="dim">-</span></div>
-    <div class="data-row"><span>Hacim:</span> <span id="vol">0 PX</span></div>
-    <div class="price-display" id="cost">0 TL</div>
-    <button id="btn-reserve">ALANI TESCİL ET</button>
-    <div class="guarantee">30 Yıl Kesintisiz Yayın Taahhüdü</div>
+<div id="grid-container">
+    <div id="canvas">
+        <div id="selection"></div>
+    </div>
 </div>
 
-<footer>© 2026 - 2056 | İLK GELEN YERİNİ SEÇER</footer>
+<div class="panel">
+    <h3>Parsel Tescili</h3>
+    <div id="info" style="font-size: 13px;">
+        Konum: <strong id="pos">-</strong><br>
+        Boyut: <strong id="dim">-</strong><br>
+        Hacim: <strong id="vol">0 PX</strong>
+    </div>
+    <div class="price" id="cost">0 TL</div>
+    <button id="btn-submit">YERİNİ TESCİL ET</button>
+    <div class="footer-note">30 Yıllık Kesintisiz Yayın Garantisi</div>
+</div>
 
 <script>
-    // 2056 Sayacı
-    const target = new Date("2056-01-01T00:00:00").getTime();
+    // Geri Sayım
+    const targetDate = new Date("2056-01-01").getTime();
     setInterval(() => {
-        const now = new Date().getTime();
-        const diff = target - now;
-        const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
-        const days = Math.floor((diff % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24));
-        document.getElementById("timer").innerText = `YOLCULUK 2056: ${years} YIL ${days} GÜN KALDI`;
+        const diff = targetDate - new Date().getTime();
+        const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+        const days = Math.floor((diff % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24));
+        document.getElementById("timer").innerText = `2056 TAAHHÜDÜ: ${years} YIL ${days} GÜN KALDI`;
     }, 1000);
 
     const canvas = document.getElementById('canvas');
-    const sel = document.getElementById('selection-box');
-    const btn = document.getElementById('btn-reserve');
-    let active = false, sX, sY, rect = {};
+    const sel = document.getElementById('selection');
+    const btn = document.getElementById('btn-submit');
+    let isDown = false, sX, sY, d = {};
+
+    // Dinamik Fiyat (Fazlara Göre)
+    const currentTotalSold = 0; // Veritabanından gelmeli
+    const unitPrice = currentTotalSold < 100000 ? 2 : (currentTotalSold < 350000 ? 5 : (currentTotalSold < 600000 ? 10 : 20));
 
     canvas.onmousedown = (e) => {
-        active = true;
-        const b = canvas.getBoundingClientRect();
-        sX = Math.floor((e.clientX - b.left) / 10) * 10;
-        sY = Math.floor((e.clientY - b.top) / 10) * 10;
+        isDown = true;
+        const r = canvas.getBoundingClientRect();
+        sX = Math.floor((e.clientX - r.left) / 10) * 10;
+        sY = Math.floor((e.clientY - r.top) / 10) * 10;
         sel.style.display = 'block';
         btn.style.display = 'none';
     };
 
     window.onmousemove = (e) => {
-        if(!active) return;
-        const b = canvas.getBoundingClientRect();
-        let cX = Math.max(0, Math.min(Math.floor((e.clientX - b.left) / 10) * 10, 1000));
-        let cY = Math.max(0, Math.min(Math.floor((e.clientY - b.top) / 10) * 10, 1000));
+        if (!isDown) return;
+        const r = canvas.getBoundingClientRect();
+        let cX = Math.max(0, Math.min(Math.floor((e.clientX - r.left) / 10) * 10, 1000));
+        let cY = Math.max(0, Math.min(Math.floor((e.clientY - r.top) / 10) * 10, 1000));
 
-        let w = Math.abs(cX - sX);
-        let h = Math.abs(cY - sY);
-        let l = Math.min(cX, sX);
-        let t = Math.min(cY, sY);
+        let w = Math.abs(cX - sX), h = Math.abs(cY - sY);
+        let l = Math.min(cX, sX), t = Math.min(cY, sY);
 
-        sel.style.width = w + 'px';
-        sel.style.height = h + 'px';
-        sel.style.left = l + 'px';
-        sel.style.top = t + 'px';
+        sel.style.width = w + 'px'; sel.style.height = h + 'px';
+        sel.style.left = l + 'px'; sel.style.top = t + 'px';
 
-        let px = w * h;
-        rect = { x: l, y: t, w, h, px, cost: px * 5 };
-        
-        document.getElementById('pos').innerText = `${l},${t}`;
-        document.getElementById('dim').innerText = `${w}x${h}`;
-        document.getElementById('vol').innerText = px.toLocaleString() + " PX";
-        document.getElementById('cost').innerText = rect.cost.toLocaleString() + " TL";
-    };
-
-    window.onmouseup = () => {
-        active = false;
-        if(rect.px >= 100) btn.style.display = 'block';
-    };
-
-    btn.onclick = () => {
-        const mailBody = `Parsel Bilgileri:\n\nKonum: ${rect.x},${rect.y}\nBoyut: ${rect.w}x${rect.h}\nPiksel: ${rect.px}\nToplam Tutar: ${rect.cost} TL\n\n30 yıllık tescil işlemini başlatmak istiyorum.`;
-        window.location.href = `mailto:mail@1milyonpixel.com?subject=Parsel_Tescili&body=${encodeURIComponent(mailBody)}`;
-    };
-</script>
-</body>
-</html>
+        d = { x: l, y: t, w, h, px: w * h, total
